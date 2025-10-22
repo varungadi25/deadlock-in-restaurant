@@ -1,2 +1,2 @@
 # deadlock-in-restaurant
-deadlock explained in restaurant situation
+deadlock explained in restaurant situation.
