@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Kitchen - Deadlock Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🍳 Restaurant Kitchen Deadlock Simulator</h1>
+            <p>Understanding Deadlocks through Cooking!</p>
+        </header>
+
+        <!-- Info Panel -->
+        <div class="info-panel">
+            <div class="status" id="status">
+                <span class="status-badge ready">System Ready</span>
+            </div>
+            <div class="concepts">
+                <h3>Deadlock Conditions Present:</h3>
+                <ul id="conditions">
+                    <li>✅ Mutual Exclusion</li>
+                    <li>✅ Hold and Wait</li>
+                    <li>✅ No Preemption</li>
+                    <li id="circular">⏳ Circular Wait - Not Yet</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Kitchen Area -->
+        <div class="kitchen">
+            <h2>Kitchen Floor</h2>
+            
+            <!-- Chefs Grid -->
+            <div class="chefs-grid" id="chefsGrid">
+                <!-- Chef 1 -->
+                <div class="chef" data-chef="1" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="chef-icon">👨‍🍳</div>
+                    <h3>Chef A</h3>
+                    <div class="chef-utensils" id="chef1-utensils"></div>
+                    <div class="chef-needs">Needs: <span id="chef1-needs">2 utensils</span></div>
+                    <div class="chef-status" id="chef1-status">Idle</div>
+                </div>
+
+                <!-- Chef 2 -->
+                <div class="chef" data-chef="2" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="chef-icon">👩‍🍳</div>
+                    <h3>Chef B</h3>
+                    <div class="chef-utensils" id="chef2-utensils"></div>
+                    <div class="chef-needs">Needs: <span id="chef2-needs">2 utensils</span></div>
+                    <div class="chef-status" id="chef2-status">Idle</div>
+                </div>
+
+                <!-- Chef 3 -->
+                <div class="chef" data-chef="3" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="chef-icon">🧑‍🍳</div>
+                    <h3>Chef C</h3>
+                    <div class="chef-utensils" id="chef3-utensils"></div>
+                    <div class="chef-needs">Needs: <span id="chef3-needs">2 utensils</span></div>
+                    <div class="chef-status" id="chef3-status">Idle</div>
+                </div>
+
+                <!-- Chef 4 -->
+                <div class="chef" data-chef="4" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="chef-icon">👨‍🍳</div>
+                    <h3>Chef D</h3>
+                    <div class="chef-utensils" id="chef4-utensils"></div>
+                    <div class="chef-needs">Needs: <span id="chef4-needs">2 utensils</span></div>
+                    <div class="chef-status" id="chef4-status">Idle</div>
+                </div>
+            </div>
+
+            <!-- Utensils Storage -->
+            <div class="storage">
+                <h3>🗄️ Utensil Storage</h3>
+                <div class="utensils-container" id="utensilsContainer">
+                    <div class="utensil" draggable="true" ondragstart="drag(event)" data-utensil="knife" id="knife">
+                        🔪 Knife
+                    </div>
+                    <div class="utensil" draggable="true" ondragstart="drag(event)" data-utensil="pan" id="pan">
+                        🍳 Pan
+                    </div>
+                    <div class="utensil" draggable="true" ondragstart="drag(event)" data-utensil="spatula" id="spatula">
+                        🥄 Spatula
+                    </div>
+                    <div class="utensil" draggable="true" ondragstart="drag(event)" data-utensil="bowl" id="bowl">
+                        🥣 Bowl
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="controls">
+            <h2>Scenarios & Controls</h2>
+            
+            <div class="scenario-buttons">
+                <button onclick="createDeadlock()" class="btn danger">⚠️ Create Deadlock</button>
+                <button onclick="resetKitchen()" class="btn secondary">🔄 Reset Kitchen</button>
+            </div>
+
+            <div class="prevention-methods">
+                <h3>Prevention Methods:</h3>
+                <button onclick="showResourceOrdering()" class="btn success">📋 Resource Ordering</button>
+                <button onclick="showTimeout()" class="btn success">⏱️ Timeout Method</button>
+                <button onclick="showBankerAlgorithm()" class="btn success">🏦 Banker's Algorithm</button>
+            </div>
+        </div>
+
+        <!-- Explanation Modal -->
+        <div class="modal" id="explanationModal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2 id="modalTitle">Prevention Method</h2>
+                <div id="modalBody"></div>
+            </div>
+        </div>
+
+        <!-- Deadlock Alert -->
+        <div class="deadlock-alert" id="deadlockAlert">
+            <h2>🚨 DEADLOCK DETECTED! 🚨</h2>
+            <p>All chefs are waiting for each other!</p>
+            <p><strong>Circular Wait Chain:</strong></p>
+            <p id="circularChain"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
